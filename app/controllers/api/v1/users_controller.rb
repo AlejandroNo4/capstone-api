@@ -4,6 +4,7 @@ class Api::V1::UsersController < ApplicationController
     render json: {
       user: @user,
       favourites: @user.trips
+      # image: @user.get_image_url()
     }
   end
 
@@ -14,7 +15,7 @@ class Api::V1::UsersController < ApplicationController
       render json: {
         status: :created,
         user: @user,
-        favourites: @user.trips
+        image: @user.get_image_url()
       }
     else
       render json: @user.errors, status: :unprocessable_entity
@@ -43,6 +44,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.permit(:username, :email, :image, :password, :password_confirmation)
   end
 end
