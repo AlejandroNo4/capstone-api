@@ -9,7 +9,8 @@ class Api::V1::SessionsController < ApplicationController
       render json: {
         status: :created,
         logged_in: true,
-        user: user
+        user: user,
+        favourites: user.trips
       }
     else
       render json: { status: 401 }
@@ -23,15 +24,15 @@ class Api::V1::SessionsController < ApplicationController
         user: @current_user
       }
     else
-    render json: {
-      logged_in: false
-    }
+      render json: {
+        logged_in: false
+      }
     end
   end
 
   def logout
     reset_session
-    render json: { 
+    render json: {
       status: 200,
       logged_out: true
     }

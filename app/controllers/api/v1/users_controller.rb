@@ -1,8 +1,10 @@
-class Api::V1::RegistrationsController < ApplicationController
-
+class Api::V1::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
-    render json: @user
+    render json: {
+      user: @user,
+      favourites: @user.trips
+    }
   end
 
   def create
@@ -11,10 +13,11 @@ class Api::V1::RegistrationsController < ApplicationController
       session[:user_id] = @user.id
       render json: {
         status: :created,
-        user: @user
+        user: @user,
+        favourites: @user.trips
       }
     else
-      render json: { status: 500 }
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
@@ -24,7 +27,7 @@ class Api::V1::RegistrationsController < ApplicationController
       @user.update(user_params)
       render json: { message: 'Successfully updated.' }, status: 200
     else
-      render error: { error: 'Unable to update.' }, status: 400
+      render json: @user.errors, status: :unprocessable_entity
     end
   end
 
