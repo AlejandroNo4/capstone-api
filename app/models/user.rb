@@ -5,10 +5,10 @@ class User < ApplicationRecord
   has_many :trips, through: :favourites
   has_one_attached :image
 
-  validates_presence_of :email, :username
-  validates_uniqueness_of :email, :username
-  validates :password, presence: true, length: { minimum: 6 }
-  validates :password_confirmation, presence: true
+  
+  validates :email, :username, length: { minimum: 4, maximum: 50 }, presence: true, uniqueness: { case_sensitive: false }
+  validates :password, :password_confirmation, presence: true, length: { minimum: 6 }
+  validates :email, format: { with: /\A\S+@.+\.\S+\z/, message: "Email invalid"  }
 
   def get_image_url
     url_for(self.image)

@@ -15,7 +15,7 @@ class Api::V1::UsersController < ApplicationController
       render json: {
         status: :created,
         user: @user,
-        image: @user.get_image_url()
+        user_thumnail: @user.get_image_url()
       }
     else
       render json: @user.errors, status: :unprocessable_entity

@@ -13,7 +13,8 @@ class Api::V1::TripsController < ApplicationController
       session[:trip_id] = @trip.id
       render json: {
         status: :created,
-        trip: @trip
+        trip: @trip,
+        trip_images: @trip.images.map{|img| ({ image: url_for(img) })}
       }
     else
       render json: { status: 500 }
@@ -42,7 +43,7 @@ class Api::V1::TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:destiny, :price, :description, :days, :hotel, :trip_type)
+    params.permit(:destiny, :price, :description, :days, :hotel, :trip_type, images: [])
   end
 
   def admin?
