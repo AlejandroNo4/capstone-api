@@ -2,6 +2,11 @@ class Api::V1::TripsController < ApplicationController
   include CurrentUserConcern
   before_action :admin?, only: %i[create update destroy]
 
+  def index
+    trips = Trip.all
+    render json: trips
+  end
+
   def show
     @trip = Trip.find(params[:id])
     render json: @trip
@@ -14,7 +19,7 @@ class Api::V1::TripsController < ApplicationController
       render json: {
         status: :created,
         trip: @trip,
-        trip_images: @trip.images.map{|img| ({ image: url_for(img) })}
+        trip_images: @trip.images.map{|img| ({ image: url_for(img) })} || [""]
       }
     else
       render json: { status: 500 }
@@ -43,7 +48,7 @@ class Api::V1::TripsController < ApplicationController
   private
 
   def trip_params
-    params.permit(:destiny, :price, :description, :days, :hotel, :trip_type, images: [])
+    params.require(:trip).permit(:destiny, :price, :description, :days, :hotel, :trip_type, images: [])
   end
 
   def admin?

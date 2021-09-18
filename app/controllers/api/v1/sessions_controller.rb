@@ -10,7 +10,7 @@ class Api::V1::SessionsController < ApplicationController
         status: :created,
         logged_in: true,
         user: user,
-        favourites: user.trips
+        favorites: user.trips
       }
     else
       render json: { status: 401 }
@@ -21,7 +21,8 @@ class Api::V1::SessionsController < ApplicationController
     if @current_user
       render json: {
         logged_in: true,
-        user: @current_user
+        user: @current_user,
+        user_thumnail: @current_user.get_image_url() || [""]
       }
     else
       render json: {

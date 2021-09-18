@@ -18,7 +18,7 @@ RSpec.describe Trip, type: :model do
   end
 
   context 'associations' do 
-    it { should have_many(:favourites) }
+    it { should have_many(:favorites) }
     it { should have_many(:users) }
     it { should have_many_attached(:images) }
   end

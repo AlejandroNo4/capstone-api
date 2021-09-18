@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   include Rails.application.routes.url_helpers
   has_secure_password
-  has_many :favourites
-  has_many :trips, through: :favourites
+  has_many :favorites
+  has_many :trips, through: :favorites
   has_one_attached :image
 
   
@@ -11,6 +11,8 @@ class User < ApplicationRecord
   validates :email, format: { with: /\A\S+@.+\.\S+\z/, message: "Email invalid"  }
 
   def get_image_url
-    url_for(self.image)
+    if self.image.attached?
+      url_for(self.image)
+    end
   end
 end
