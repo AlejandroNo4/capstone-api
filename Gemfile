@@ -22,10 +22,10 @@ gem 'json'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 gem 'active_model_serializers', '~> 0.10.12'
+gem 'aws-sdk-s3', '~> 1.103'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 gem 'rubocop'
-gem 'aws-sdk-s3', '~> 1.103'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
