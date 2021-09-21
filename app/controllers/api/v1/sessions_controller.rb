@@ -10,7 +10,7 @@ class Api::V1::SessionsController < ApplicationController
         status: :created,
         logged_in: true,
         user: user,
-        favourites: user.trips
+        favorites: user.trips
       }
     else
       render json: { status: 401 }
@@ -19,10 +19,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def logged_in
     if @current_user
-      render json: {
-        logged_in: true,
-        user: @current_user
-      }
+      render json: @current_user, serializer: UserSerializer
     else
       render json: {
         logged_in: false

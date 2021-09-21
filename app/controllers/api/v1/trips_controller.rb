@@ -2,19 +2,21 @@ class Api::V1::TripsController < ApplicationController
   include CurrentUserConcern
   before_action :admin?, only: %i[create update destroy]
 
+  def index
+    trips = Trip.all
+    render json: trips
+  end
+
   def show
     @trip = Trip.find(params[:id])
-    render json: @trip
+    render json: @trip, serializer: TripSerializer
   end
 
   def create
     @trip = Trip.new(trip_params)
     if @trip.save
       session[:trip_id] = @trip.id
-      render json: {
-        status: :created,
-        trip: @trip
-      }
+      render json: @trip, serializer: TripSerializer, status: :created
     else
       render json: { status: 500 }
     end
@@ -42,7 +44,7 @@ class Api::V1::TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:destiny, :price, :description, :days, :hotel, :trip_type)
+    params.require(:trip).permit(:destiny, :price, :description, :days, :hotel, :trip_type, images: [])
   end
 
   def admin?

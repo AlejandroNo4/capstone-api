@@ -1,21 +1,16 @@
 class Api::V1::UsersController < ApplicationController
+  include CurrentUserConcern
+
   def show
     @user = User.find(params[:id])
-    render json: {
-      user: @user,
-      favourites: @user.trips
-    }
+    render json: @user, serializer: UserSerializer
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      render json: {
-        status: :created,
-        user: @user,
-        favourites: @user.trips
-      }
+      render json: @user, serializer: UserSerializer, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -23,7 +18,7 @@ class Api::V1::UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user
+    if @current_user == @user
       @user.update(user_params)
       render json: { message: 'Successfully updated.' }, status: 200
     else
@@ -33,16 +28,16 @@ class Api::V1::UsersController < ApplicationController
 
   def destroy
     @user = User.where(id: params[:id]).first
-    if @user.destroy
+    if @current_user == @user && @user.destroy
       render json: { message: 'Successfully deleted.' }, status: 200
     else
-      head(:unprocessable_entity)
+      render json: { message: 'Access denied' }, status: :unprocessable_entity
     end
   end
 
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password, :password_confirmation)
+    params.require(:user).permit(:username, :email, :image, :password, :password_confirmation)
   end
 end

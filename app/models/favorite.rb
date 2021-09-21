@@ -1,4 +1,4 @@
-class Favourite < ApplicationRecord
+class Favorite < ApplicationRecord
   belongs_to :user
   belongs_to :trip
 end

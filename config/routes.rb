@@ -7,10 +7,9 @@ Rails.application.routes.draw do
 
       resources :users, only: [:create, :update, :destroy, :show]
       resources :trips, only: [:index, :create, :update, :destroy, :show]
-      post "favourites", to: "favourites#create"
-      get "remove_favourite", to: "favourites#destroy"
+      post "favorites", to: "favorites#create"
+      delete "remove_favorite", to: "favorites#destroy"
 
-      resources :favourites, only: [:create, :destroy]
       root to: 'static#home'
     end
   end
