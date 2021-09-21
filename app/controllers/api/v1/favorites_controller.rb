@@ -4,11 +4,9 @@ class Api::V1::FavoritesController < ApplicationController
   def create
     @favorite = @current_user.favorites.build(trip_id: params['trip_id'])
     if @favorite.save
-      render json: {
-        favorite_trips: @current_user.trips
-      }
+      render json: { message: 'Successfully added' }, status: 200
     else
-      render json: { status: 500, message: 'Unable to add.' }
+      render json: { message: 'Unable to add.' }, status: 500
     end
   end
 

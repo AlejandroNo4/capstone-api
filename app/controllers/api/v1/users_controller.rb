@@ -3,22 +3,14 @@ class Api::V1::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    render json: {
-      user: @user,
-      favorites: @user.trips
-      # image: @user.get_image_url()
-    }
+    render json: @user, serializer: UserSerializer
   end
 
   def create
     @user = User.new(user_params)
     if @user.save
       session[:user_id] = @user.id
-      render json: {
-        status: :created,
-        user: @user,
-        user_thumnail: @user.get_image_url() || [""]
-      }
+      render json: @user, serializer: UserSerializer, status: :created
     else
       render json: @user.errors, status: :unprocessable_entity
     end
@@ -46,6 +38,6 @@ class Api::V1::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :image, :password, :password_confirmation)
+    params.permit(:username, :email, :image, :password, :password_confirmation)
   end
 end

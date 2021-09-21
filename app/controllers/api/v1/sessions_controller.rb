@@ -19,11 +19,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def logged_in
     if @current_user
-      render json: {
-        logged_in: true,
-        user: @current_user,
-        user_thumnail: @current_user.get_image_url() || [""]
-      }
+      render json:  @current_user, serializer: UserSerializer
     else
       render json: {
         logged_in: false

@@ -10,7 +10,6 @@ Rails.application.routes.draw do
       post "favorites", to: "favorites#create"
       get "remove_favorite", to: "favorites#destroy"
 
-      resources :favorites, only: [:create, :destroy]
       root to: 'static#home'
     end
   end
