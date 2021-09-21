@@ -55,7 +55,7 @@ describe 'Trips API', type: :request do
     expect(parsed['trips'].size).to be(1)
     expect(parsed['trips'].size).to_not be(0)
 
-    get '/api/v1/remove_favorite', params: {
+    delete '/api/v1/remove_favorite', params: {
       trip_id: 15
     }
 
