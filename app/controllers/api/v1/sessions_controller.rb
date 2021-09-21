@@ -19,7 +19,7 @@ class Api::V1::SessionsController < ApplicationController
 
   def logged_in
     if @current_user
-      render json:  @current_user, serializer: UserSerializer
+      render json: @current_user, serializer: UserSerializer
     else
       render json: {
         logged_in: false

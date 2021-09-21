@@ -2,8 +2,9 @@ require 'rails_helper'
 require 'json'
 
 describe 'Trips API', type: :request do
-  it 'return all trips' do 
-    FactoryBot.create(:trip, destiny: 'Paris', price: 13.23, description: 'An amazing trip', days: 10, hotel: 'One', trip_type: 'Car')
+  it 'return all trips' do
+    FactoryBot.create(:trip, destiny: 'Paris', price: 13.23, description: 'An amazing trip', days: 10, hotel: 'One',
+                             trip_type: 'Car')
     get '/api/v1/trips'
 
     expect(response).to have_http_status(:success)
@@ -11,15 +12,15 @@ describe 'Trips API', type: :request do
     expect(JSON.parse(response.body).size).to_not eq(2)
   end
 
-  it 'can NOT be created by a COMMON user' do 
-    post "/api/v1/trips", :params => {
+  it 'can NOT be created by a COMMON user' do
+    post '/api/v1/trips', params: {
       trip: {
-      destiny: "Paris",
-      price: 124.72,
-      description: "test desc",
-      days: 2,
-      hotel: "One",
-      trip_type: "Flight"
+        destiny: 'Paris',
+        price: 124.72,
+        description: 'test desc',
+        days: 2,
+        hotel: 'One',
+        trip_type: 'Flight'
       }
     }
     parsed = JSON.parse(response.body)
@@ -27,24 +28,25 @@ describe 'Trips API', type: :request do
     expect(parsed).to_not include('trip')
   end
 
-  it 'can be created by a ADMIN user' do 
-    FactoryBot.create(:user, id: 10, username: 'Pablo', email: 'examplepablo@mail.com', password: '111111', password_confirmation: '111111', admin: true)
+  it 'can be created by a ADMIN user' do
+    FactoryBot.create(:user, id: 10, username: 'Pablo', email: 'examplepablo@mail.com', password: '111111',
+                             password_confirmation: '111111', admin: true)
 
-    post '/api/v1/sessions', :params => {
+    post '/api/v1/sessions', params: {
       user: {
-        email: "examplepablo@mail.com",
-        password: "111111" 
+        email: 'examplepablo@mail.com',
+        password: '111111'
       }
     }
 
-    post "/api/v1/trips", :params => {
+    post '/api/v1/trips', params: {
       trip: {
-      destiny: "Paris",
-      price: 124.72,
-      description: "test desc",
-      days: 2,
-      hotel: "One",
-      trip_type: "Flight"
+        destiny: 'Paris',
+        price: 124.72,
+        description: 'test desc',
+        days: 2,
+        hotel: 'One',
+        trip_type: 'Flight'
       }
     }
     parsed = JSON.parse(response.body)
@@ -56,34 +58,30 @@ describe 'Trips API', type: :request do
   end
 
   it 'can be updated by an ADMIN user' do
-    FactoryBot.create(:user, id: 10, username: 'Pablo', email: 'examplepablo@mail.com', password: '111111', password_confirmation: '111111', admin: true)
+    FactoryBot.create(:user, id: 10, username: 'Pablo', email: 'examplepablo@mail.com', password: '111111',
+                             password_confirmation: '111111', admin: true)
 
-    post '/api/v1/sessions', :params => {
+    post '/api/v1/sessions', params: {
       user: {
-        email: "examplepablo@mail.com",
-        password: "111111" 
+        email: 'examplepablo@mail.com',
+        password: '111111'
       }
     }
 
-    post "/api/v1/trips", :params => {
+    post '/api/v1/trips', params: {
       trip: {
-      destiny: "Paris",
-      price: 124.72,
-      description: "test desc",
-      days: 2,
-      hotel: "One",
-      trip_type: "Flight"
+        destiny: 'Paris',
+        price: 124.72,
+        description: 'test desc',
+        days: 2,
+        hotel: 'One',
+        trip_type: 'Flight'
       }
     }
 
-    patch "/api/v1/trips/3", :params => {
+    patch '/api/v1/trips/3', params: {
       trip: {
-      destiny: "Parisine",
-      price: 124.72,
-      description: "test desc",
-      days: 2,
-      hotel: "One",
-      trip_type: "Flight"
+        destiny: 'Los Angeles'
       }
     }
     parsed = JSON.parse(response.body)
@@ -92,36 +90,32 @@ describe 'Trips API', type: :request do
   end
 
   it 'can NOT be updated by a normal user' do
-    FactoryBot.create(:user, id: 10, username: 'Pablo', email: 'examplepablo@mail.com', password: '111111', password_confirmation: '111111', admin: true)
+    FactoryBot.create(:user, id: 10, username: 'Pablo', email: 'examplepablo@mail.com', password: '111111',
+                             password_confirmation: '111111', admin: true)
 
-    post '/api/v1/sessions', :params => {
+    post '/api/v1/sessions', params: {
       user: {
-        email: "examplepablo@mail.com",
-        password: "111111" 
+        email: 'examplepablo@mail.com',
+        password: '111111'
       }
     }
 
-    post "/api/v1/trips", :params => {
+    post '/api/v1/trips', params: {
       trip: {
-      destiny: "Paris",
-      price: 124.72,
-      description: "test desc",
-      days: 2,
-      hotel: "One",
-      trip_type: "Flight"
+        destiny: 'Paris',
+        price: 124.72,
+        description: 'test desc',
+        days: 2,
+        hotel: 'One',
+        trip_type: 'Flight'
       }
     }
 
-    delete "/api/v1/logout"
+    delete '/api/v1/logout'
 
-    patch "/api/v1/trips/3", :params => {
+    patch '/api/v1/trips/3', params: {
       trip: {
-      destiny: "Parisine",
-      price: 124.72,
-      description: "test desc",
-      days: 2,
-      hotel: "One",
-      trip_type: "Flight"
+        destiny: 'Los Angeles'
       }
     }
     parsed = JSON.parse(response.body)
@@ -130,27 +124,28 @@ describe 'Trips API', type: :request do
   end
 
   it 'can be deleted by an ADMIN user' do
-    FactoryBot.create(:user, id: 10, username: 'Pablo', email: 'examplepablo@mail.com', password: '111111', password_confirmation: '111111', admin: true)
+    FactoryBot.create(:user, id: 10, username: 'Pablo', email: 'examplepablo@mail.com', password: '111111',
+                             password_confirmation: '111111', admin: true)
 
-    post '/api/v1/sessions', :params => {
+    post '/api/v1/sessions', params: {
       user: {
-        email: "examplepablo@mail.com",
-        password: "111111" 
+        email: 'examplepablo@mail.com',
+        password: '111111'
       }
     }
 
-    post "/api/v1/trips", :params => {
+    post '/api/v1/trips', params: {
       trip: {
-      destiny: "Paris",
-      price: 124.72,
-      description: "test desc",
-      days: 2,
-      hotel: "One",
-      trip_type: "Flight"
+        destiny: 'Paris',
+        price: 124.72,
+        description: 'test desc',
+        days: 2,
+        hotel: 'One',
+        trip_type: 'Flight'
       }
     }
 
-    delete "/api/v1/trips/5"
+    delete '/api/v1/trips/5'
 
     parsed = JSON.parse(response.body)
     expect(parsed['message']).to eq('Successfully deleted.')
@@ -158,28 +153,29 @@ describe 'Trips API', type: :request do
   end
 
   it 'can NOT be deleted by a normal user' do
-    FactoryBot.create(:user, id: 10, username: 'Pablo', email: 'examplepablo@mail.com', password: '111111', password_confirmation: '111111', admin: true)
+    FactoryBot.create(:user, id: 10, username: 'Pablo', email: 'examplepablo@mail.com', password: '111111',
+                             password_confirmation: '111111', admin: true)
 
-    post '/api/v1/sessions', :params => {
+    post '/api/v1/sessions', params: {
       user: {
-        email: "examplepablo@mail.com",
-        password: "111111" 
+        email: 'examplepablo@mail.com',
+        password: '111111'
       }
     }
 
-    post "/api/v1/trips", :params => {
+    post '/api/v1/trips', params: {
       trip: {
-      destiny: "Paris",
-      price: 124.72,
-      description: "test desc",
-      days: 2,
-      hotel: "One",
-      trip_type: "Flight"
+        destiny: 'Paris',
+        price: 124.72,
+        description: 'test desc',
+        days: 2,
+        hotel: 'One',
+        trip_type: 'Flight'
       }
     }
 
-    delete "/api/v1/logout"
-    delete "/api/v1/trips/5"
+    delete '/api/v1/logout'
+    delete '/api/v1/trips/5'
 
     parsed = JSON.parse(response.body)
     expect(parsed['message']).to eq('Access Denied')
