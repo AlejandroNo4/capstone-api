@@ -8,7 +8,7 @@ describe 'Users API', type: :request do
     get '/api/v1/users/1'
 
     expect(response).to have_http_status(:success)
-    expect(JSON.parse(response.body).size).to eq(2)
+    expect(JSON.parse(response.body).size).to eq(5)
     expect(JSON.parse(response.body).size).to_not eq(0)
   end
 
@@ -22,12 +22,12 @@ describe 'Users API', type: :request do
       }}
     expect(response).to have_http_status(:success)
     parsed = JSON.parse(response.body)
-    expect(parsed.size).to eq(3)
+    expect(parsed.size).to eq(5)
     expect(parsed.size).to_not eq(0)
-    expect(parsed['user']['username']).to eq('MariaB')
-    expect(parsed['user']['email']).to eq('a2nemail@mail.com')
-    expect(parsed['user']['username']).to_not eq('')
-    expect(parsed['user']['email']).to_not eq('')
+    expect(parsed['username']).to eq('MariaB')
+    expect(parsed['email']).to eq('a2nemail@mail.com')
+    expect(parsed['username']).to_not eq('')
+    expect(parsed['email']).to_not eq('')
   end
 
   it 'delete a user' do 
@@ -39,7 +39,7 @@ describe 'Users API', type: :request do
         password_confirmation: "111111" 
       }}
     expect(response).to have_http_status(:success)
-    expect(JSON.parse(response.body).size).to eq(3)
+    expect(JSON.parse(response.body).size).to eq(5)
     expect(JSON.parse(response.body).size).to_not eq(0)
 
     delete "/api/v1/users/3"
@@ -57,7 +57,7 @@ describe 'Users API', type: :request do
       }}
     expect(response).to have_http_status(:success)
     parsed = JSON.parse(response.body)
-    expect(parsed['user']['username']).to eq('MariaB')
+    expect(parsed['username']).to eq('MariaB')
 
     put "/api/v1/users/4", :params => {
       user: { 
