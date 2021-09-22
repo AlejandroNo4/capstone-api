@@ -51,7 +51,6 @@ RSpec.describe User, type: :model do
   context 'associations' do
     it { should have_many(:favorites) }
     it { should have_many(:trips) }
-    it { should have_one_attached(:image) }
   end
 
   context 'table data base' do
