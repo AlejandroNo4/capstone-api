@@ -26,6 +26,7 @@ gem 'aws-sdk-s3', '~> 1.103'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 gem 'rubocop'
+gem "mini_magick"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
