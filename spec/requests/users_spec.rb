@@ -8,7 +8,7 @@ describe 'Users API', type: :request do
     get '/api/v1/users/1'
 
     expect(response).to have_http_status(:success)
-    expect(JSON.parse(response.body).size).to eq(5)
+    expect(JSON.parse(response.body).size).to eq(6)
     expect(JSON.parse(response.body).size).to_not eq(0)
   end
 
@@ -23,7 +23,7 @@ describe 'Users API', type: :request do
     }
     expect(response).to have_http_status(:success)
     parsed = JSON.parse(response.body)
-    expect(parsed.size).to eq(5)
+    expect(parsed.size).to eq(6)
     expect(parsed.size).to_not eq(0)
     expect(parsed['username']).to eq('MariaB')
     expect(parsed['email']).to eq('a2nemail@mail.com')
@@ -41,7 +41,7 @@ describe 'Users API', type: :request do
       }
     }
     expect(response).to have_http_status(:success)
-    expect(JSON.parse(response.body).size).to eq(5)
+    expect(JSON.parse(response.body).size).to eq(6)
     expect(JSON.parse(response.body).size).to_not eq(0)
 
     delete '/api/v1/users/3'

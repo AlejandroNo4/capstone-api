@@ -88,6 +88,8 @@ To get a local copy up and running follow these simple example steps.
 
 ## Endpoints
 
+**TIP** 🙌🏽  You can use this npm library called [Object-to-formdata](https://www.npmjs.com/package/object-to-formdata) on some of your front-end requests. The usage is intuitive and simple. 💥
+
 <h3 align="center">Create a user 👤<h3>
 
 <br/>
@@ -100,7 +102,7 @@ To get a local copy up and running follow these simple example steps.
           email: "",
           password: "",
           password_confirmation: "",
-          image: (file)
+          image: [file]
         }
       }
 
@@ -116,7 +118,7 @@ To get a local copy up and running follow these simple example steps.
           email: "",
           password: "",
           password_confirmation: "",
-          image: (file)
+          image: [file]
         }
       }
 
