@@ -1,5 +1,8 @@
 if Rails.env === "production"
-  Rails.application.config.session_store :cookie_store, key: '_auth_app', domain: 'auth-app-no42.herokuapp.com'
+  Rails.application.config.session_store :cookie_store, key: '_auth_app',  domain: nil,
+  secure: true,
+  httponly: false,
+  same_site: :none
 else
   Rails.application.config.session_store :cookie_store, key: '_auth_app'
 end
