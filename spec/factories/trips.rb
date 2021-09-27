@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :trip do
-    destiny 'Paris'
+    destination 'Paris'
     price '124.72'
     description 'test desc'
     days '2'

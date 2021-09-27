@@ -157,7 +157,7 @@ To get a local copy up and running follow these simple example steps.
 
       {
         trip: {
-          destiny: "",
+          destination: "",
           price: "",
           description: "",
           days: "",
@@ -177,7 +177,7 @@ To get a local copy up and running follow these simple example steps.
 
       {
         trip: {
-          destiny: "",
+          destination: "",
           price: "",
           description: "",
           days: "",

@@ -44,7 +44,7 @@ class Api::V1::TripsController < ApplicationController
   private
 
   def trip_params
-    params.require(:trip).permit(:destiny, :price, :description, :days, :hotel, :trip_type, images: [])
+    params.require(:trip).permit(:destination, :price, :description, :days, :hotel, :trip_type, images: [])
   end
 
   def admin?

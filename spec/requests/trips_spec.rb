@@ -3,7 +3,7 @@ require 'json'
 
 describe 'Trips API', type: :request do
   it 'return all trips' do
-    FactoryBot.create(:trip, destiny: 'Paris', price: 13.23, description: 'An amazing trip', days: 10, hotel: 'One',
+    FactoryBot.create(:trip, destination: 'Paris', price: 13.23, description: 'An amazing trip', days: 10, hotel: 'One',
                              trip_type: 'Car')
     get '/api/v1/trips'
 
@@ -15,7 +15,7 @@ describe 'Trips API', type: :request do
   it 'can NOT be created by a COMMON user' do
     post '/api/v1/trips', params: {
       trip: {
-        destiny: 'Paris',
+        destination: 'Paris',
         price: 124.72,
         description: 'test desc',
         days: 2,
@@ -41,7 +41,7 @@ describe 'Trips API', type: :request do
 
     post '/api/v1/trips', params: {
       trip: {
-        destiny: 'Paris',
+        destination: 'Paris',
         price: 124.72,
         description: 'test desc',
         days: 2,
@@ -51,9 +51,9 @@ describe 'Trips API', type: :request do
     }
     parsed = JSON.parse(response.body)
     p parsed.size
-    expect(parsed['destiny']).to eq('Paris')
+    expect(parsed['destination']).to eq('Paris')
     expect(parsed.size).to eq(8)
-    expect(parsed['destiny']).to_not eq('')
+    expect(parsed['destination']).to_not eq('')
     expect(parsed.size).to_not eq(0)
   end
 
@@ -70,7 +70,7 @@ describe 'Trips API', type: :request do
 
     post '/api/v1/trips', params: {
       trip: {
-        destiny: 'Paris',
+        destination: 'Paris',
         price: 124.72,
         description: 'test desc',
         days: 2,
@@ -81,7 +81,7 @@ describe 'Trips API', type: :request do
 
     patch '/api/v1/trips/3', params: {
       trip: {
-        destiny: 'Los Angeles'
+        destination: 'Los Angeles'
       }
     }
     parsed = JSON.parse(response.body)
@@ -102,7 +102,7 @@ describe 'Trips API', type: :request do
 
     post '/api/v1/trips', params: {
       trip: {
-        destiny: 'Paris',
+        destination: 'Paris',
         price: 124.72,
         description: 'test desc',
         days: 2,
@@ -115,7 +115,7 @@ describe 'Trips API', type: :request do
 
     patch '/api/v1/trips/3', params: {
       trip: {
-        destiny: 'Los Angeles'
+        destination: 'Los Angeles'
       }
     }
     parsed = JSON.parse(response.body)
@@ -136,7 +136,7 @@ describe 'Trips API', type: :request do
 
     post '/api/v1/trips', params: {
       trip: {
-        destiny: 'Paris',
+        destination: 'Paris',
         price: 124.72,
         description: 'test desc',
         days: 2,
@@ -165,7 +165,7 @@ describe 'Trips API', type: :request do
 
     post '/api/v1/trips', params: {
       trip: {
-        destiny: 'Paris',
+        destination: 'Paris',
         price: 124.72,
         description: 'test desc',
         days: 2,

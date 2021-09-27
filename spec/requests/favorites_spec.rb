@@ -3,7 +3,7 @@ require 'json'
 
 describe 'Trips API', type: :request do
   it "can be ADDED to a user's favorite" do
-    FactoryBot.create(:trip, id: 15, destiny: 'Paris', price: 13.23, description: 'An amazing trip', days: 10,
+    FactoryBot.create(:trip, id: 15, destination: 'Paris', price: 13.23, description: 'An amazing trip', days: 10,
                              hotel: 'One', trip_type: 'Car')
     FactoryBot.create(:user, id: 33, username: 'Pablo', email: 'examplep@mail.com', password: '111111',
                              password_confirmation: '111111', admin: true)
@@ -30,7 +30,7 @@ describe 'Trips API', type: :request do
   end
 
   it "can be DELETED to a user's favorite" do
-    FactoryBot.create(:trip, id: 15, destiny: 'Paris', price: 13.23, description: 'An amazing trip', days: 10,
+    FactoryBot.create(:trip, id: 15, destination: 'Paris', price: 13.23, description: 'An amazing trip', days: 10,
                              hotel: 'One', trip_type: 'Car')
     FactoryBot.create(:user, id: 33, username: 'Pablo', email: 'examplep@mail.com', password: '111111',
                              password_confirmation: '111111', admin: true)
