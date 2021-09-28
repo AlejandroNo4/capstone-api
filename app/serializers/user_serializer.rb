@@ -8,5 +8,5 @@ class UserSerializer < ActiveModel::Serializer
   def logged_in
     true
   end
-  attributes :id, :username, :email, :user_thumnail, :logged_in, :trips
+  attributes :id, :username, :email, :user_thumnail, :logged_in, :trips, :admin
 end
