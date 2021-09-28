@@ -18,7 +18,7 @@ class Api::V1::TripsController < ApplicationController
       session[:trip_id] = @trip.id
       render json: @trip, serializer: TripSerializer, status: :created
     else
-      render json: { status: 500 }
+      render json: @trip.errors, status: :unprocessable_entity
     end
   end
 
