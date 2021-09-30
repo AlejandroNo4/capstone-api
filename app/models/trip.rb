@@ -5,4 +5,6 @@ class Trip < ApplicationRecord
   validates :destination, :price, :days, :hotel, :trip_type, presence: true, length: { maximum: 50 }
   validates :description, presence: true, length: { maximum: 400 }
   has_many_attached :images
+
+  default_scope -> { order(created_at: :desc) }
 end
