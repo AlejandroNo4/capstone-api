@@ -8,24 +8,24 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def show
-    @trip = Trip.find(params[:id])
-    render json: @trip, serializer: TripSerializer
+    trip = Trip.find(params[:id])
+    render json: trip, serializer: TripSerializer
   end
 
   def create
-    @trip = Trip.new(trip_params)
-    if @trip.save
-      session[:trip_id] = @trip.id
-      render json: @trip, serializer: TripSerializer, status: :created
+    trip = Trip.new(trip_params)
+    if trip.save
+      session[:trip_id] = trip.id
+      render json: trip, serializer: TripSerializer, status: :created
     else
-      render json: @trip.errors, status: :unprocessable_entity
+      render json: trip.errors, status: :unprocessable_entity
     end
   end
 
   def update
-    @trip = Trip.find(params[:id])
-    if @trip
-      @trip.update(trip_params)
+    trip = Trip.find(params[:id])
+    if trip
+      trip.update(trip_params)
       render json: { message: 'Successfully updated.' }, status: 200
     else
       render error: { error: 'Unable to update.' }, status: 400
@@ -33,8 +33,8 @@ class Api::V1::TripsController < ApplicationController
   end
 
   def destroy
-    @trip = Trip.where(id: params[:id]).first
-    if @trip.destroy
+    trip = Trip.where(id: params[:id]).first
+    if trip.destroy
       render json: { message: 'Successfully deleted.' }, status: 200
     else
       head(:unprocessable_entity)
