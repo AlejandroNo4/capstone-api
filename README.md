@@ -214,11 +214,7 @@ To get a local copy up and running follow these simple example steps.
 
 <br>
 
-          DELETE  /api/v1/remove_favorite
-
-          {
-            trip_id: ""
-          }
+          DELETE  /api/v1/favorites{trip_id}
 
 <br>
 <br>

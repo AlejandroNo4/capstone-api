@@ -11,7 +11,7 @@ class Api::V1::FavoritesController < ApplicationController
   end
 
   def destroy
-    @favorite = @current_user.favorites.find_by(trip_id: params['trip_id'])
+    @favorite = @current_user.favorites.find_by(trip_id: params[:id])
     @favorite.destroy
     render json: { message: 'Successfully deleted.' }, status: 200
   end
