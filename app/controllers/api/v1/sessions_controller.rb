@@ -13,7 +13,7 @@ class Api::V1::SessionsController < ApplicationController
         favorites: user.trips
       }
     else
-      render json: { status: 401 }
+      render json: { message: 'Wrong email or password.' }, status: :unprocessable_entity
     end
   end
 
